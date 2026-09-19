@@ -1,0 +1,203 @@
+{
+  "info": {
+    "name": "CodeAlpha Restaurant Management System - Task 3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "menuItemId",
+      "value": ""
+    },
+    {
+      "key": "tableId",
+      "value": ""
+    },
+    {
+      "key": "inventoryId",
+      "value": ""
+    },
+    {
+      "key": "reservationId",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Register Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Rawad\", \"email\": \"rawad@example.com\", \"password\": \"password123\"}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/register"
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"rawad@example.com\", \"password\": \"password123\"}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login"
+        }
+      }
+    },
+    {
+      "name": "View Menu",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/menu"
+        }
+      }
+    },
+    {
+      "name": "View Tables",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/tables"
+        }
+      }
+    },
+    {
+      "name": "Check Table Availability",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/tables/availability?date=2027-01-20T19:00:00.000Z"
+        }
+      }
+    },
+    {
+      "name": "My Reservations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/reservations/my"
+        }
+      }
+    },
+    {
+      "name": "Reserve Table",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tableId\": \"{{tableId}}\", \"date\": \"2027-01-20T19:00:00.000Z\", \"guests\": 4}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/reservations"
+        }
+      }
+    },
+    {
+      "name": "Place Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"table\": \"{{tableId}}\", \"items\": [{\"menuItem\": \"{{menuItemId}}\", \"quantity\": 2}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/orders"
+        }
+      }
+    },
+    {
+      "name": "My Orders",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/orders/my"
+        }
+      }
+    },
+    {
+      "name": "View Inventory",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/inventory"
+        }
+      }
+    },
+    {
+      "name": "Low Stock Alerts",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/inventory/alerts"
+        }
+      }
+    }
+  ]
+}
